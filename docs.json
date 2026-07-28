@@ -2,86 +2,120 @@
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
   "name": "StitcherAI",
+  "description": "Documentation for StitcherAI — the system of intelligence for IT Finance.",
   "colors": {
     "primary": "#2A9FAA",
     "light": "#6BE0D6",
     "dark": "#17A6B4"
   },
   "favicon": "/favicon.svg",
-  "navigation": {
-    "groups": [
-      {
-        "group": "Getting Started",
-        "pages": [
-          "index",
-          "quickstart",
-          "how-to/set-up-authoring-environment"
-        ]
-      },
-      {
-        "group": "Overview",
-        "pages": [
-          "introduction",
-          "use-cases",
-          "what-makes-stitcherai-different",
-          "architecture-two-engines",
-          "access-and-administration"
-        ]
-      },
-      {
-        "group": "The data foundation",
-        "pages": [
-          "data-foundation",
-          "connections-and-credentials",
-          "focus",
-          "ai-ingestion"
-        ]
-      },
-      {
-        "group": "The semantic pipeline",
-        "pages": [
-          "pipeline-overview",
-          "connect",
-          "model",
-          "build",
-          "engage"
-        ]
-      },
-      {
-        "group": "Attribution, artifacts & governance",
-        "pages": [
-          "attribution-and-allocation",
-          "generating-artifacts",
-          "forecasting",
-          "cost-governance"
-        ]
-      },
-      {
-        "group": "AI spend & the reasoning engine",
-        "pages": [
-          "managing-ai-spend",
-          "reasoning-engine"
-        ]
-      },
-      {
-        "group": "Operating StitcherAI",
-        "pages": [
-          "running-and-monitoring",
-          "security",
-          "authoring-and-version-control"
-        ]
-      }
-    ]
-  },
   "logo": {
     "light": "/logo/light.svg",
     "dark": "/logo/dark.svg"
   },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "introduction",
+              "use-cases",
+              "what-makes-stitcherai-different",
+              "architecture-two-engines"
+            ]
+          },
+          {
+            "group": "Getting Started",
+            "pages": [
+              "quickstart",
+              "how-to/bring-in-a-dataset",
+              "how-to/attribute-cost",
+              "how-to/build-an-allocation",
+              "how-to/generate-an-artifact",
+              "how-to/build-a-forecast",
+              "how-to/build-a-cost-control",
+              "how-to/execute-a-pipeline"
+            ]
+          },
+          {
+            "group": "Security & Access",
+            "pages": [
+              "access-and-administration",
+              "security"
+            ]
+          },
+          {
+            "group": "The data foundation",
+            "pages": [
+              "data-foundation",
+              "connections-and-credentials",
+              "focus",
+              "ai-ingestion"
+            ]
+          },
+          {
+            "group": "The semantic pipeline",
+            "pages": [
+              "pipeline-overview",
+              {
+                "group": "Connect",
+                "pages": [
+                  "connect/connect"
+                ]
+              },
+              {
+                "group": "Model",
+                "pages": [
+                  "model",
+                  "model/prepare",
+                  "model/normalize",
+                  "model/enrich",
+                  "model/allocate"
+                ]
+              },
+              {
+                "group": "Build",
+                "pages": [
+                  "build",
+                  "build/generate-artifacts",
+                  "build/govern",
+                  "build/events"
+                ]
+              },
+              {
+                "group": "Engage",
+                "pages": [
+                  "engage/engage"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "AI spend & the reasoning engine",
+            "pages": [
+              "managing-ai-spend",
+              "reasoning-engine"
+            ]
+          },
+          {
+            "group": "Operating StitcherAI",
+            "pages": [
+              "running-and-monitoring",
+              "authoring-and-version-control"
+            ]
+          }
+        ]
+      }
+    ]
+  },
   "navbar": {
     "links": [
       {
-        "href": "https://app.stitcher.ai",
-        "label": "Open app"
+        "label": "Open app",
+        "href": "https://app.stitcher.ai"
       }
     ]
   },
@@ -97,14 +131,6 @@
       "vscode"
     ]
   },
-  "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
-    }
-  },
-  "description": "Documentation for StitcherAI — the system of intelligence for IT Finance.",
   "redirects": [
     {
       "source": "/",

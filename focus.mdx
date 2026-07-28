@@ -11,14 +11,13 @@ StitcherAI normalizes every cost source — a cloud bill, a SaaS invoice, a Kube
   <Card title="A common schema" icon="layer-group">
     Every source lands in the same FOCUS columns, so a Kubernetes export, a SaaS invoice, and a cloud bill can be compared and combined directly.
   </Card>
-
   <Card title="Open formats you own" icon="box-open">
     Outputs are **Parquet and CSV** — portable and warehouse-native, not a proprietary API. They land in your own storage.
   </Card>
 </CardGroup>
 
 <Note>
-  FOCUS is an open standard, not a StitcherAI format. StitcherAI's founder co-created it. Building your finance practice on FOCUS means your data stays portable and isn't locked to any one tool.
+FOCUS is an open standard, not a StitcherAI format. StitcherAI's founder co-created it. Building your finance practice on FOCUS means your data stays portable and isn't locked to any one tool.
 </Note>
 
 ## Guaranteed vs best-effort columns
@@ -53,13 +52,12 @@ StitcherAI is precise about what normalization delivers. Some columns are always
 </Tabs>
 
 <Warning>
-  **StitcherAI does not manufacture definition that isn't present in the source.** If a vendor's data doesn't distinguish regions or carry resource ids, those columns won't be invented. This is what keeps the model trustworthy — it never implies a level of detail the underlying data can't support. Where richer definition is needed for AI spend, [telemetry](/managing-ai-spend) supplies it.
+**StitcherAI does not manufacture definition that isn't present in the source.** If a vendor's data doesn't distinguish regions or carry resource ids, those columns won't be invented. This is what keeps the model trustworthy — it never implies a level of detail the underlying data can't support. Where richer definition is needed for AI spend, [telemetry](/managing-ai-spend) supplies it.
 </Warning>
 
 <Frame caption="FOCUS columns — a guaranteed core, plus best-effort detail to the extent the source supports it">
   ![FOCUS columns — a guaranteed core, plus best-effort detail to the extent the source supports it](/images/fig-07-focus-guaranteed-vs-best-effort.png)
 </Frame>
-
 ## Two roads to FOCUS
 
 Every source reaches FOCUS one of two ways, and both converge on the same columns.
@@ -68,7 +66,6 @@ Every source reaches FOCUS one of two ways, and both converge on the same column
   <Card title="Native converters" icon="bolt">
     Structured cloud exports are mapped into FOCUS automatically, with no configuration.
   </Card>
-
   <Card title="AI-powered mapping" icon="wand-magic-sparkles" href="/ai-ingestion">
     Unstructured and custom data — PDF invoices, arbitrary vendor files — is mapped into FOCUS with AI.
   </Card>
@@ -77,27 +74,16 @@ Every source reaches FOCUS one of two ways, and both converge on the same column
 StitcherAI ships native converters for these providers' structured exports:
 
 <CardGroup cols={3}>
-  <Card title="AWS" icon="aws">
-  </Card>
-
-  <Card title="Azure" icon="microsoft">
-  </Card>
-
-  <Card title="Google Cloud" icon="google">
-  </Card>
-
-  <Card title="OCI" icon="cloud">
-  </Card>
-
-  <Card title="IBM" icon="server">
-  </Card>
-
-  <Card title="Databricks" icon="database">
-  </Card>
+  <Card title="AWS" icon="aws" />
+  <Card title="Azure" icon="microsoft" />
+  <Card title="Google Cloud" icon="google" />
+  <Card title="OCI" icon="cloud" />
+  <Card title="IBM" icon="server" />
+  <Card title="Databricks" icon="database" />
 </CardGroup>
 
 <Info>
-  Anything outside this set — a custom file or a vendor invoice, including a PDF — takes the AI-powered road instead. Whichever road a source takes, it ends up in the same FOCUS columns, so downstream everything is treated identically. See [AI-powered ingestion](/ai-ingestion).
+Anything outside this set — a custom file or a vendor invoice, including a PDF — takes the AI-powered road instead. Whichever road a source takes, it ends up in the same FOCUS columns, so downstream everything is treated identically. See [AI-powered ingestion](/ai-ingestion).
 </Info>
 
 ## Next
@@ -106,7 +92,6 @@ StitcherAI ships native converters for these providers' structured exports:
   <Card title="AI-powered ingestion" icon="wand-magic-sparkles" href="/ai-ingestion">
     Turn PDFs and custom files into FOCUS through chat.
   </Card>
-
   <Card title="Datasets, connectors & data connections" icon="plug" href="/data-foundation">
     Where the sources that get normalized come from.
   </Card>

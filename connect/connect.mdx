@@ -9,7 +9,9 @@ You reference each source **by name**. The credentials and location behind that 
 
 ## Cost data sources
 
-A cost data source retrieves billing data from object/file storage or a database. Beyond pointing at the source by name, you can:
+A cost data source retrieves billing data from object/file storage or a database, referenced by name.
+
+You can also:
 
 - **Override columns** — set or replace a column's value as the data is read in.
 - **Remove columns** — drop sensitive or oversized raw fields you don't need downstream.
@@ -35,12 +37,12 @@ Some providers' billing exports leave out information StitcherAI needs to comput
 </Tabs>
 
 <Note>
-  **Prepaid balances.** While spend stays **within** a prepaid balance, it is reflected as **`EffectiveCost`** and `BilledCost` is zero. The **overage** beyond the balance becomes **`BilledCost`** — so the model matches how you were actually billed.
+**Prepaid balances.** While spend stays **within** a prepaid balance, it is reflected as **`EffectiveCost`** and `BilledCost` is zero. The **overage** beyond the balance becomes **`BilledCost`** — so the model matches how you were actually billed.
 </Note>
 
 ## Business and reference data sources
 
-Business data brings the context that makes cost attributable — ownership, teams, cost centers, headcount, revenue, and budgets. Reference series such as customer count or transaction volume can also feed [forecasting](/forecasting). There are two ways to store it:
+Business data brings the context that makes cost attributable — ownership, teams, cost centers, headcount, revenue, and budgets. Reference series such as customer count or transaction volume can also feed [forecasts](/build/events). There are two ways to store it:
 
 <Tabs>
   <Tab title="External storage">
@@ -59,18 +61,16 @@ A precondition is a **cheap, deterministic check** — no AI involved — that d
   <Accordion title="Data exists" icon="list-check">
     A **row-count threshold** on a filtered subset — for example, "this dataset must have more than zero rows after filtering." Choose the comparison and the threshold.
   </Accordion>
-
   <Accordion title="Daily coverage" icon="calendar-days">
     Assert that **every group has data for every day** in the run period. You pick the date column and the columns that define a group — useful for catching a source that silently dropped a day or a region.
   </Accordion>
-
   <Accordion title="Aggregate threshold" icon="calculator">
     A **single numeric result** — computed with a SQL aggregate over the dataset — compared against a threshold. The run period is available as a placeholder so the check can be period-aware.
   </Accordion>
 </AccordionGroup>
 
 <Tip>
-  Preconditions are the inexpensive safety net **before** the modeling work begins. For checks that run **after** artifacts are built — evaluating the model against policy — see [Cost governance](/cost-governance).
+Preconditions are the inexpensive safety net **before** the modeling work begins. For checks that run **after** artifacts are built — evaluating the model against policy — see [Govern](/build/govern).
 </Tip>
 
 ## Next
@@ -79,7 +79,6 @@ A precondition is a **cheap, deterministic check** — no AI involved — that d
   <Card title="Model the data" icon="diagram-project" href="/model">
     Prepare, normalize to FOCUS, enrich, and allocate.
   </Card>
-
   <Card title="What can be connected" icon="database" href="/data-foundation">
     Datasets, connectors, and the full source catalog.
   </Card>

@@ -8,7 +8,6 @@ StitcherAI is made up of two engines that share one cost model.
 <Frame caption="The Semantic Engine builds the model; the Reasoning Engine acts on it; FOCUS is the shared contract">
   ![The Semantic Engine builds the model; the Reasoning Engine acts on it; FOCUS is the shared contract](/images/fig-03-two-engines-seam.png)
 </Frame>
-
 ## The Semantic Engine builds the model
 
 The Semantic Engine is the scheduled pipeline that builds and owns your cost model, in four phases:
@@ -28,16 +27,16 @@ The Semantic Engine is the scheduled pipeline that builds and owns your cost mod
   </Step>
 </Steps>
 
-It runs on a schedule you define (typically daily), is deterministic and reproducible, and writes its output to storage you own. Each phase and its operators are covered in the pipeline documentation.
+It runs on a schedule you define (for example, daily), is deterministic and reproducible, and writes its output to storage you own. Each phase and its operators are covered in the pipeline documentation.
 
 ## The Reasoning Engine acts on the model
 
-The Reasoning Engine is the always-present layer of IT-Finance agents that read the cost model and act on it inside your workflows. It's reachable from the AI tools your teams already use, it reasons over the cost model in finance terms, and it plans and carries out multi-step tasks under human oversight — and each agent's work is checked by a critic before it stands.
+The Reasoning Engine is the always-present layer of IT-Finance agents that read the cost model and act on it inside your workflows. It's reachable from the AI tools your teams already use via **MCP (Model Context Protocol)** — the open standard that lets any MCP-compatible client attach to it directly — and it reasons over the cost model in finance terms, planning and carrying out multi-step tasks under human oversight, with a critic reviewing each agent's work before it's accepted. See [the reasoning engine](/reasoning-engine) for the agent roster and the MCP tool surface.
 
 ## One shared contract
 
 <Info>
-  The two engines meet at the cost model: your data connections together with the FOCUS schema are the shared contract. The Reasoning Engine reasons over **exactly what the Semantic Engine produced** — the same complete, normalized, attributed data — so its answers and actions are grounded in your real model, not an approximation.
+The two engines meet at the cost model: your data connections together with the FOCUS schema are the shared contract. The Reasoning Engine reasons over **exactly what the Semantic Engine produced** — the same complete, normalized, attributed data — so its answers and actions are grounded in your real model, not an approximation.
 </Info>
 
 ## Why two engines

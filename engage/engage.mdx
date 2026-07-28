@@ -21,7 +21,7 @@ A destination is either object/file storage or a database:
 </Tabs>
 
 <Tip>
-  Parquet is columnar and warehouse-native — a good default for analytical destinations. CSV is the most portable choice when something downstream needs plain tabular text.
+Parquet is columnar and warehouse-native — a good default for analytical destinations. CSV is the most portable choice when something downstream needs plain tabular text.
 </Tip>
 
 ## Choose what to send
@@ -32,20 +32,19 @@ For each destination, you select which artifacts to deliver — in one of two wa
   <Card title="By artifact group" icon="layer-group">
     Send **everything in a group** — for example, all of your KPIs or all of your chargeback tables — in one configuration.
   </Card>
-
   <Card title="By individual artifact name" icon="tag">
     Send **one specific artifact** by its name.
   </Card>
 </CardGroup>
 
-The **group** and **name** are the ones you assigned when you created the artifact in [Generate](/generating-artifacts) — the same selection model used when chaining artifacts and when choosing what to govern.
+The **group** and **name** are the ones you assigned when you created the artifact in [Generate](/build/generate-artifacts) — the same selection model used when chaining artifacts and when choosing what to govern.
 
 ## Push to a custom location
 
 Engage is also how curated output is pushed to a **custom location** in one of your own systems — for example, handing a **chargeback** artifact to an **ERP**.
 
 <Note>
-  Pushing an artifact out is an **Engage** step, not part of generating it. You build the artifact in Generate, then deliver it here. This is also how the [Reasoning Engine](/reasoning-engine) can submit output — such as a chargeback — into your downstream systems.
+Pushing an artifact out is an **Engage** step, not part of generating it. You build the artifact in Generate, then deliver it here. This is also how the [Reasoning Engine](/reasoning-engine) can submit output — such as a chargeback — into your downstream systems.
 </Note>
 
 ## Notifications
@@ -60,10 +59,9 @@ Notification groups (the channels and email recipients) are configured in the we
 ## Next
 
 <CardGroup cols={2}>
-  <Card title="Generating artifacts" icon="cubes" href="/generating-artifacts">
+  <Card title="Generate artifacts" icon="cubes" href="/build/generate-artifacts">
     Create the artifacts — and assign the groups and names — that Engage delivers.
   </Card>
-
   <Card title="Pipeline overview" icon="diagram-project" href="/pipeline-overview">
     Back to the four phases and the shared building blocks.
   </Card>

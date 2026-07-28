@@ -30,9 +30,8 @@ Ingestion is managed in a chat conversation in the authoring environment. You br
 <Frame caption="Bring a PDF invoice into chat; StitcherAI proposes a FOCUS mapping to preview and refine">
   ![Bring a PDF invoice into chat; StitcherAI proposes a FOCUS mapping to preview and refine](/images/fig-08-chat-ingest-pdf-to-focus.png)
 </Frame>
-
 <Tip>
-  Because the mapping is saved as part of your model, the same invoice format is recognized automatically on future runs — you do this once per format, not once per file.
+Because the mapping is saved as part of your model, the same invoice format is recognized automatically on future runs — you do this once per format, not once per file.
 </Tip>
 
 ## Fuzzy mapping with custom-trained models
@@ -43,18 +42,16 @@ Real invoices are full of values that defeat simple rules — the same vendor, r
   <Card title="Vendor names" icon="building">
     Many spellings and legal-entity variants resolve to one vendor.
   </Card>
-
   <Card title="Regions" icon="globe">
     Provider-specific region labels map to a consistent set.
   </Card>
-
   <Card title="Service names" icon="cubes">
     Inconsistent service descriptions collapse to canonical services.
   </Card>
 </CardGroup>
 
 <Note>
-  This same fuzzy-mapping capability is available inside the model as a mapping step, so you can normalize messy vendor, region, and service values during a run — not only at ingestion time.
+This same fuzzy-mapping capability is available inside the model as a mapping step, so you can normalize messy vendor, region, and service values during a run — not only at ingestion time.
 </Note>
 
 ## AI intelligence operators
@@ -65,7 +62,6 @@ StitcherAI can go beyond mapping known fields. **AI intelligence operators** ext
   <Card title="Enrich an existing cost dataset" icon="circle-plus">
     Pull detail out of unstructured documents and attach it to cost you already have.
   </Card>
-
   <Card title="Create a cost dataset" icon="file-circle-plus">
     Where no structured source exists, build a cost dataset from the unstructured data itself.
   </Card>
@@ -76,10 +72,10 @@ Either way, the result is **normalized to FOCUS like any other source**, so it's
 ## Built for breadth
 
 <Info>
-  The approach is general, not tied to a fixed provider list. It handles arbitrary vendor invoices — cloud, SaaS, and even non-IT vendors. If a vendor sends you a bill, StitcherAI can bring it into your FOCUS model.
+The approach is general, not tied to a fixed provider list. It handles arbitrary vendor invoices — cloud, SaaS, and even non-IT vendors. If a vendor sends you a bill, StitcherAI can bring it into your FOCUS model.
 </Info>
 
-Remember the guarantee from [FOCUS](/focus): StitcherAI populates what the data supports and does not manufacture definition that isn't there. AI-powered ingestion gets _more_ signal out of an unstructured file than a rules-only approach could — but it still maps what's present, rather than inventing what isn't.
+Remember the guarantee from [FOCUS](/focus): StitcherAI populates what the data supports and does not manufacture definition that isn't there. AI-powered ingestion gets *more* signal out of an unstructured file than a rules-only approach could — but it still maps what's present, rather than inventing what isn't.
 
 ## Next
 
@@ -87,7 +83,6 @@ Remember the guarantee from [FOCUS](/focus): StitcherAI populates what the data 
   <Card title="FOCUS" icon="layer-group" href="/focus">
     The open cost language every ingested source lands in.
   </Card>
-
   <Card title="Managing AI spend" icon="robot" href="/managing-ai-spend">
     How telemetry adds the feature, team, and customer definition cost data alone can't carry.
   </Card>
