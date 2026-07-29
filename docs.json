@@ -30,7 +30,7 @@
           {
             "group": "Getting Started",
             "pages": [
-              "quickstart",
+              "how-to/access-stitcherai",
               "how-to/bring-in-a-dataset",
               "how-to/attribute-cost",
               "how-to/build-an-allocation",
