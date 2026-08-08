@@ -1,0 +1,77 @@
+---
+title: "Contract intelligence"
+description: "Turn a vendor contract or invoice into a tracked cost stream, and link it to real usage for utilization tracking or reconciliation."
+icon: "file-contract"
+---
+
+StitcherAI extracts intelligence from your contracts and invoices, and operationalizes it — capturing dates, pricing, discounts, commitments, and other commercial terms as structured data you can link to cost and usage signals.
+
+When detailed cost data isn't available for a provider, that extracted contract intelligence becomes the source of truth for building a FOCUS-normalized cost dataset. When detailed cost data does exist, contract details enrich it instead — enabling forecasting, controls, and commitment tracking.
+
+The result: software and service spend becomes measurable, traceable, and allocatable — instead of a centralized lump-sum line item. Contract intelligence turns commercial agreements into a reliable foundation for IT finance and FinOps workflows, from visibility and forecasting to chargeback and financial reconciliation.
+
+## Getting a contract or invoice in
+
+A contract or invoice comes in as a **business dataset** — connected the same way ownership, headcount, or budgets are connected to StitcherAI (see [the data foundation](/data-foundation)). There are two ways in:
+
+<Tabs>
+  <Tab title="AI-chat ingestion">
+    Bring in the PDF and, in a chat conversation in the authoring environment, StitcherAI proposes, previews, and lets you refine the parsed mapping — see [AI-powered ingestion](/ai-ingestion). Suited to unstructured, one-off documents.
+  </Tab>
+  <Tab title="A configured connection">
+    Store contracts or invoices in a cloud storage location and set up a business data connection pointed at it, the same way you'd connect [any other business dataset](/how-to/bring-in-a-dataset). Suited to structured, recurring documents.
+  </Tab>
+</Tabs>
+
+Either path lands the contract or invoice as a business dataset with StitcherAI's parsed understanding of its terms — ready for the next step.
+
+<Tip>
+  When configuring it, set the **business dataset type to Contract intelligence** (see [how to bring in a dataset](/how-to/bring-in-a-dataset)) — distinct from the generic Tabular or Budget (tabular) types.
+</Tip>
+
+## Adding the cost dataset to the pipeline
+
+This step happens in the **authoring environment**. With the contract and/or invoice ingested, bring its cost into the pipeline as a **cost data source** under [Connect](/connect/connect). Which **cost source** you choose depends on whether a detailed cost & usage feed is available for that provider:
+
+<Frame caption="Adding a cost data source: choosing the cost source in the Origin step">
+  ![Adding a cost data source: choosing the cost source in the Origin step](/images/fig-20-contract-intelligence-adding-a-cost-dataset.png)
+</Frame>
+
+<Steps>
+  <Step title="No detailed cost & usage is available">
+    Choose **Derive from an existing data source**, and point it at the contract or invoice business dataset by name. StitcherAI produces a FOCUS-normalized cost stream from its parsed terms, with no separate feed of its own.
+  </Step>
+  <Step title="Detailed cost & usage is available, and already connected">
+    Choose **Create from a source connection** for that feed, then enable a **linked contract data source** and/or **linked invoice data source**, pointing at the contract- or invoice-derived dataset from the step above. If the feed isn't connected yet, [set it up first](/how-to/bring-in-a-dataset).
+  </Step>
+</Steps>
+
+## What linking gets you
+
+Once a real usage feed is linked to a contract- or invoice-derived dataset, StitcherAI knows both represent the same spend for that provider.
+
+<CardGroup cols={2}>
+  <Card title="Linked to a contract" icon="file-contract">
+    The real usage feed **supersedes** the contract-derived estimate for reporting, while enabling **utilization tracking** — how actual consumption compares to the negotiated contract terms as months pass.
+  </Card>
+
+  <Card title="Linked to an invoice" icon="receipt">
+    Lets you **reconcile** the usage-based feed against what the provider actually invoiced.
+  </Card>
+</CardGroup>
+
+This is how a negotiated agreement or a monthly bill becomes more than a record — tracked against, and checked against, what was actually consumed.
+
+> 🖼 **Figure:** Contract or invoice → derived cost dataset → linked to a real usage feed, with utilization tracking and reconciliation as the two outcomes. _(image: contract-intelligence-flow)_
+
+## Next
+
+<CardGroup cols={2}>
+  <Card title="Connect" icon="plug" href="/connect/connect">
+    Where cost and business data sources are configured.
+  </Card>
+
+  <Card title="How to: Bring in a dataset" icon="database" href="/how-to/bring-in-a-dataset">
+    The step-by-step for connecting any dataset, cost or business.
+  </Card>
+</CardGroup>

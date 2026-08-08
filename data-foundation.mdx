@@ -9,13 +9,15 @@ Everything StitcherAI does starts with getting data in and ends with sending cur
 
 <CardGroup cols={3}>
   <Card title="Dataset" icon="table">
-    *What* the data is and what it means — an AWS cost & usage export, an OpenAI usage dataset, a vendor invoice, a business-data file.
+    _What_ the data is and what it means — an AWS cost & usage export, an OpenAI usage dataset, a vendor invoice, a business-data file.
   </Card>
+
   <Card title="Connector" icon="plug">
-    *How* StitcherAI reaches the data. Three families: file / blob storage, database, and provider API.
+    _How_ StitcherAI reaches the data. Three families: file / blob storage, database, and provider API.
   </Card>
+
   <Card title="Data connector" icon="arrow-right-arrow-left">
-    A dataset **+** a connector, set up as a **data source** (data in) or a **destination** (curated output out).
+    A dataset **\+** a connector, set up as a **data source** (data in) or a **destination** (curated output out).
   </Card>
 </CardGroup>
 
@@ -27,9 +29,11 @@ So a "data connector" is always a dataset paired with a connector, pointed eithe
   <Accordion title="Cost datasets" icon="file-invoice-dollar">
     Spend itself — cloud, SaaS, AI, vendor invoices, and internal IT. These are normalized to [FOCUS](/focus), the open cost language.
   </Accordion>
+
   <Accordion title="Business datasets" icon="sitemap">
-    The context that makes spend meaningful — ownership, teams, cost centers, headcount, revenue, budgets. You use them later to enrich cost, drive allocation, and measure KPIs.
+    The context that makes spend meaningful — ownership, teams, cost centers, headcount, revenue, budgets, contracts. You use them later to enrich cost, drive allocation, and measure KPIs. A contract or invoice, once ingested, can also become its own cost dataset and be tracked against real usage — see [Contract intelligence](/contract-intelligence).
   </Accordion>
+
   <Accordion title="Reference / feature data" icon="chart-line">
     Business series such as headcount or customer count over time. Brought in to improve forecasts beyond historical cost alone.
   </Accordion>
@@ -37,24 +41,16 @@ So a "data connector" is always a dataset paired with a connector, pointed eithe
 
 Most data is **structured** — Parquet, CSV, or database tables. StitcherAI also ingests **unstructured** data, principally **PDF** invoices, which it maps into the cost model with AI. See [AI-powered ingestion](/ai-ingestion).
 
-## A base connection you craft from
+## Single-purpose vs shared, multi-purpose connections
 
-You don't re-enter connection details every time you add a source. Define a **base data connection** once — the reusable location and credentials for a system — then craft a full data source or destination from it in the authoring environment.
-
-<Steps>
-  <Step title="Define a base data connection">
-    The location and credentials for a system (a storage account, a warehouse, a provider API). Credentials are entered in the web app — see [Connections & credentials](/connections-and-credentials).
-  </Step>
-  <Step title="Craft a source or a destination from it">
-    Choose the dataset and its options. One base connection can underlie many sources and destinations, so you set the credentials and location only once.
-  </Step>
-</Steps>
+You don't re-enter connection details every time you add a source. A connection is either dedicated to one dataset, or set up once and reused across many — see [Connections & credentials](/connections-and-credentials) for the full explanation of both.
 
 <Frame caption="From one base data connection, craft a data source or a destination">
   ![From one base data connection, craft a data source or a destination](/images/fig-06-base-connection-to-source.png)
 </Frame>
+
 <Tip>
-Credentials never live in your configuration repository — only the connection's *name* is referenced from the model. The full reasoning, and how validation works, is in [Connections & credentials](/connections-and-credentials).
+  Credentials never live in your configuration repository — only the connection's _name_ is referenced from the model. The full reasoning, and how validation works, is in [Connections & credentials](/connections-and-credentials).
 </Tip>
 
 ## What you can connect
@@ -62,29 +58,37 @@ Credentials never live in your configuration repository — only the connection'
 StitcherAI is best understood by **retrieval family** rather than a connector-by-connector list. The table shows the breadth — which providers are covered, an example dataset for each, and how the data is retrieved.
 
 | Provider(s) | Example dataset | How it's retrieved |
-|---|---|---|
+| --- | --- | --- |
 | AWS | Cost & Usage (CUR), FOCUS export | File / blob storage (S3) |
 | Azure | Cost Management / FOCUS export | File / blob storage (Azure Storage) |
 | Google Cloud | Billing export | Database (BigQuery) or blob (GCS) |
 | Snowflake | Organization usage & cost | Database |
 | OpenAI · Anthropic / Claude · Twilio · MongoDB · Elastic · Confluent | Usage & cost | Provider API |
 | Any vendor | Invoice / custom cost (including PDF) | File / blob storage |
-| Internal teams | Business data (ownership, headcount, budgets) | File / blob storage, database, or in-repo |
+| Internal teams | Business data (ownership, headcount, budgets, contracts) | File / blob storage, database, or in-repo |
 
 <Note>
-New providers are added without changing the model — a source is always a dataset plus a connector in one of the three families above. For arbitrary vendors (cloud, SaaS, or non-IT) and for PDFs, see [AI-powered ingestion](/ai-ingestion).
+  New providers are added without changing the model — a source is always a dataset plus a connector in one of the three families above. For arbitrary vendors (cloud, SaaS, or non-IT) and for PDFs, see [AI-powered ingestion](/ai-ingestion).
 </Note>
+
+> 🖼 **Figure:** The connections screen — configured data sources and destinations. _(image: connections-screen)_
 
 ## Next
 
-<CardGroup cols={3}>
+<CardGroup cols={2}>
   <Card title="Connections & credentials" icon="key" href="/connections-and-credentials">
     Define a connection safely and validate it before use.
   </Card>
+
   <Card title="FOCUS" icon="layer-group" href="/focus">
     The open cost language every source is normalized into.
   </Card>
+
   <Card title="AI-powered ingestion" icon="wand-magic-sparkles" href="/ai-ingestion">
     Bring PDFs and custom files into FOCUS through chat.
+  </Card>
+
+  <Card title="Contract intelligence" icon="file-contract" href="/contract-intelligence">
+    Turn a contract or invoice into a tracked cost stream.
   </Card>
 </CardGroup>

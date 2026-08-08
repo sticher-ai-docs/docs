@@ -94,6 +94,12 @@
             ]
           },
           {
+            "group": "Contract intelligence",
+            "pages": [
+              "contract-intelligence"
+            ]
+          },
+          {
             "group": "AI spend & the reasoning engine",
             "pages": [
               "managing-ai-spend",

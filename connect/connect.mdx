@@ -7,12 +7,27 @@ description: "Configure cost and business data sources, supply the per-provider 
 
 You reference each source **by name**. The credentials and location behind that name are defined once in the web app and validated before use; see [Connections & credentials](/connections-and-credentials). For the full catalog of what can be connected — cloud billing, warehouses, SaaS and usage APIs, and file or PDF sources — see the [data foundation](/data-foundation).
 
+## Cost source
+
+A cost data source either:
+
+<CardGroup cols={2}>
+  <Card title="Reads from a data connection" icon="plug">
+    A **single-purpose connection** dedicated to that one data source, or a **shared, multi-purpose connection** whose dataset-shape properties (provider, format, schema, path) you supply per data source — see [Connections & credentials](/connections-and-credentials).
+  </Card>
+
+  <Card title="Derives from an existing data source" icon="file-contract">
+    Producing cost from a parsed contract or invoice's own FOCUS cost, with no separate feed of its own. A real feed can then optionally link to it for utilization tracking or reconciliation — see [Contract intelligence](/contract-intelligence).
+  </Card>
+</CardGroup>
+
 ## Cost data sources
 
 A cost data source retrieves billing data from object/file storage or a database, referenced by name.
 
 You can also:
 
+- **Add columns** — bring in a new column as the data is read in.
 - **Override columns** — set or replace a column's value as the data is read in.
 - **Remove columns** — drop sensitive or oversized raw fields you don't need downstream.
 - **Supply per-provider inputs the raw export omits** — so accurate FOCUS cost can be computed.
@@ -34,11 +49,21 @@ Some providers' billing exports leave out information StitcherAI needs to comput
   <Tab title="Confluent">
     Provide a **prepaid balance**.
   </Tab>
+  <Tab title="Databricks">
+    System billing tables omit negotiated enterprise discounts and prepaid commit balances — provide a **discount percentage** and a **prepaid balance**.
+  </Tab>
+  <Tab title="Twilio">
+    The Balance API doesn't report a usable balance for invoiced accounts — provide a **prepaid balance** so StitcherAI can track its burn-down.
+  </Tab>
 </Tabs>
 
 <Note>
-**Prepaid balances.** While spend stays **within** a prepaid balance, it is reflected as **`EffectiveCost`** and `BilledCost` is zero. The **overage** beyond the balance becomes **`BilledCost`** — so the model matches how you were actually billed.
+  **Prepaid balances.** While spend stays **within** a prepaid balance, it is reflected as **`EffectiveCost`** and `BilledCost` is zero. The **overage** beyond the balance becomes **`BilledCost`** — so the model matches how you were actually billed.
 </Note>
+
+<Tip>
+  These per-provider inputs are **date-based** — a change takes effect from the date you set, without losing historical accuracy for periods before it.
+</Tip>
 
 ## Business and reference data sources
 
@@ -61,16 +86,18 @@ A precondition is a **cheap, deterministic check** — no AI involved — that d
   <Accordion title="Data exists" icon="list-check">
     A **row-count threshold** on a filtered subset — for example, "this dataset must have more than zero rows after filtering." Choose the comparison and the threshold.
   </Accordion>
+
   <Accordion title="Daily coverage" icon="calendar-days">
     Assert that **every group has data for every day** in the run period. You pick the date column and the columns that define a group — useful for catching a source that silently dropped a day or a region.
   </Accordion>
+
   <Accordion title="Aggregate threshold" icon="calculator">
     A **single numeric result** — computed with a SQL aggregate over the dataset — compared against a threshold. The run period is available as a placeholder so the check can be period-aware.
   </Accordion>
 </AccordionGroup>
 
 <Tip>
-Preconditions are the inexpensive safety net **before** the modeling work begins. For checks that run **after** artifacts are built — evaluating the model against policy — see [Govern](/build/govern).
+  Preconditions are the inexpensive safety net **before** the modeling work begins. For checks that run **after** artifacts are built — evaluating the model against policy — see [Govern](/build/govern).
 </Tip>
 
 ## Next
@@ -79,7 +106,12 @@ Preconditions are the inexpensive safety net **before** the modeling work begins
   <Card title="Model the data" icon="diagram-project" href="/model">
     Prepare, normalize to FOCUS, enrich, and allocate.
   </Card>
+
   <Card title="What can be connected" icon="database" href="/data-foundation">
     Datasets, connectors, and the full source catalog.
+  </Card>
+
+  <Card title="Contract intelligence" icon="file-contract" href="/contract-intelligence">
+    Derive cost from a contract or invoice, and link it to real usage.
   </Card>
 </CardGroup>

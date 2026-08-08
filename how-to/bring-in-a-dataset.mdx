@@ -22,40 +22,76 @@ Building a comprehensive cost model is StitcherAI's core purpose — and that st
 Everything below happens in the web app, before you ever open the authoring environment.
 
 <Steps>
+  <Step title="Choose what to create">
+    A **cost connection**, a **business connection** (each single-purpose, bringing in one dataset), or a **shared, multi-purpose connection** (location and credentials set once, reused across many pipelines) — see [Connections & credentials](/connections-and-credentials#single-purpose-vs-shared-multi-purpose).
+  </Step>
   <Step title="Provision provider access">
     Create the least-privilege access the provider needs — a role, service account, or API key. StitcherAI publishes ready-made, per-provider infrastructure so you don't have to assemble permissions by hand — see [Connections & credentials](/connections-and-credentials#per-provider-setup-ready-to-use).
   </Step>
-
   <Step title="Select the data source">
-    Start a new connection and select the **data source** — the provider and dataset you're connecting, for example "AWS Cost & Usage Report" or "OpenAI usage."
+    For a cost or business connection, select the **data source** — the provider and dataset you're connecting, for example "AWS Cost & Usage Report" or "OpenAI usage." Skip this for a shared connection — it isn't tied to one dataset.
   </Step>
-
   <Step title="Select the connector">
-    Choose the **connector** StitcherAI should use to reach it — file/blob storage, a database, or the provider's API — matching the access you provisioned in step 1.
+    Choose the **connector** StitcherAI should use to reach it — file/blob storage, a database, or the provider's API for a cost or business connection; a generic object-store or database connector (S3, GCS, Azure Storage, Snowflake, BigQuery) for a shared connection.
   </Step>
-
   <Step title="Configure the connector">
-    Fill in the fields the connector needs to locate your data — for example a **bucket or storage account name**, **region**, **path**, and a **role or ARN** for cloud storage. The exact fields vary by connector.
+    Fill in the fields the connector needs to locate your data — for example a **bucket or storage account name**, **region**, **path**, and a **role or ARN** for cloud storage. The exact fields vary by connector. A shared connection stops here — no dataset-shape fields; each data source that reuses it supplies its own later, in the step below.
   </Step>
-
   <Step title="Name and save the connection">
     Give the connection a name and save it. StitcherAI validates it immediately — confirming it can actually read (or, for a destination, write) the data — before it's usable. See [Connections & credentials](/connections-and-credentials#define-and-validate-a-connection).
   </Step>
 </Steps>
 
 <Tip>
-  **Provider not in the list?** Select **custom cost dataset** instead of a named provider in step 2, then select and configure the connector the same way — the connector and configuration steps are identical whether the dataset is a listed provider or a custom one.
+  **Provider not in the list?** Select **custom cost dataset** instead of a named provider in "Select the data source," then select and configure the connector the same way — the connector and configuration steps are identical whether the dataset is a listed provider or a custom one.
 </Tip>
 
 ## Add the source — in the authoring environment
 
-With the connection saved and named, reference it from your pipeline configuration.
+With the connection saved and named, reference it from your pipeline configuration. Add a data source under **Connect**, choosing whether it's a **cost** dataset (cloud, SaaS, AI, vendor invoice) or a **business** dataset (ownership, headcount, budgets, contracts) — matching the category you set up in the web app.
 
-<Steps>
-  <Step title="Craft a data source from the connection">
-    In the authoring environment, add a data source under **Connect** and point it at your connection **by name**. Choose the dataset — a cost dataset (cloud, SaaS, AI, vendor invoice) or a business dataset (ownership, headcount, budgets) — and its options.
-  </Step>
-</Steps>
+The tabs differ by kind: a **cost** data source has **Origin, General, Transformation**; a **business** data source has **Origin, General, Preconditions, Transformation** — its own tab, not folded into General.
+
+<Tabs>
+  <Tab title="Cost data sources">
+    **Origin.** Choose the **cost source**:
+
+    <CardGroup cols={2}>
+      <Card title="Create from a source connection" icon="plug">
+        Read cost data from a connection you set up in the web app. Enter the connection's name, then choose **single-purpose** (default — a dedicated connection that already carries all its dataset properties) or **shared, multi-purpose** (supply provider, connection type, format, schema, sub path, date path format, and file path suffix here instead — see [Connections & credentials](/connections-and-credentials#single-purpose-vs-shared-multi-purpose)). Optionally enable a **linked contract or invoice data source** — see [Contract intelligence](/contract-intelligence).
+      </Card>
+
+      <Card title="Derive from an existing data source" icon="file-contract">
+        Produce this cost from a parsed contract or invoice's own FOCUS cost (an existing data source), with no separate feed of its own. Enter the existing data source's name. See [Contract intelligence](/contract-intelligence) for the full flow, from ingestion through linking.
+      </Card>
+    </CardGroup>
+
+    **General.** Name the data source. **Enable additional inputs** for providers whose billing export omits data needed for accurate FOCUS cost — see [Connect](/connect/connect#per-provider-inputs-for-accurate-cost) for which providers and fields. Set **preconditions** here, in the same tab — Data exists, Daily coverage, or an aggregate threshold — so a run is skipped gracefully instead of processing bad input.
+
+    **Transformation.** **Override** or **remove** columns before the data reaches the rest of the pipeline.
+  </Tab>
+  <Tab title="Business data sources">
+    **Origin.** Choose where the data comes from:
+
+    <CardGroup cols={2}>
+      <Card title="Remote data source" icon="cloud">
+        External storage (S3, GCS, Azure Blob), using date-partitioned paths. Enter the connection's name, choose **single-purpose** or **shared, multi-purpose connection** (same concept as cost — see [Connections & credentials](/connections-and-credentials#single-purpose-vs-shared-multi-purpose)), and set a **path suffix**.
+      </Card>
+
+      <Card title="Git-based data source" icon="code-branch">
+        Stored directly alongside the pipeline configuration in your repository, for small, static, non-sensitive data.
+      </Card>
+    </CardGroup>
+
+    Set **missing data handling** — if the current period's file is missing: raise an **error**, or **use the last available period** as a fallback.
+
+    **General.** Name the data source, and choose the **business dataset type** — **Tabular** (generic), **Budget (tabular)**, or **Contract intelligence** (for an ingested contract or invoice — see [Contract intelligence](/contract-intelligence)).
+
+    **Preconditions.** Its own tab here, unlike cost — the same three checks: **Data exists**, **Daily coverage**, or a **SQL aggregate** threshold, so a run is skipped gracefully instead of processing bad input.
+
+    **Transformation.** **Override** columns, or create **derived business datasets** — transform the dataset itself, not just a column, to fill in something missing and produce one or more derived variations.
+  </Tab>
+</Tabs>
 
 ## Next steps
 
@@ -66,5 +102,9 @@ With the connection saved and named, reference it from your pipeline configurati
 
   <Card title="Model" icon="diagram-project" href="/model">
     Where a connected source goes next — Prepare, Normalize, Enrich, Allocate.
+  </Card>
+
+  <Card title="Contract intelligence" icon="file-contract" href="/contract-intelligence">
+    Bringing in a contract or invoice, specifically.
   </Card>
 </CardGroup>
